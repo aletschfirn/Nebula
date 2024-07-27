@@ -45,14 +45,15 @@ class $modify(MyMenuLayer, MenuLayer) {
 		// menuBG -> setVisible(false);  So what this does is disabling main menu background
 
 		auto newMenu = CCMenu::create(); // This one creates new CCMenu in main menu
-		auto newMenuBG = CCMenuItemSprite::create(
-			CCSprite::createWithSpriteFrameName("square02_001.png"),
-			CCSprite::createWithSpriteFrameName("square02_001.png"),
-			CCSprite::createWithSpriteFrameName("square02_001.png")
-		);
+		newMenu -> CCNode::ignoreAnchorPointForPosition(false);
+		
+		auto newMenuBG = CCSprite::create("square02_001.png");
+		auto newMenuBGnode = CCMenuItemSpriteExtra::create(newMenuBG, this, menu_selector(MyMenuLayer::onMyButton));
+		
 		menuLayer -> addChild(newMenu);
 		newMenu -> setID("new-main-menu"_spr);
-		newMenu -> addChild(newMenuBG);
+		
+		newMenu -> addChild(newMenuBGnode);
 		newMenuBG -> setID("new-main-menu-bg"_spr);
 		
 		menuLayer -> updateLayout();
